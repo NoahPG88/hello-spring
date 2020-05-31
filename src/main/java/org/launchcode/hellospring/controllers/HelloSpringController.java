@@ -20,17 +20,8 @@ public class HelloSpringController {
     }
 
     @GetMapping("form")
-    @ResponseBody
     public String helloForm(){
-        String html = "<html>" +
-                "<body>" +
-                "<form method = 'post' action = '/hello'>" +
-                "<input type = 'text' name = 'name' />" +
-                "<input type - 'submit' value = 'Greet Me!' />" +
-                "</form>" +
-                "</body>" +
-                "</html>";
-        return html;
+        return "form";
     }
 }
 
