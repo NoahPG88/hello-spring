@@ -1,27 +1,43 @@
 package org.launchcode.hellospring.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class HelloSpringController {
     //Responds to /hello?name=LaunchCode
     @RequestMapping(value = "hello", method = {RequestMethod.GET, RequestMethod.POST})
-    @ResponseBody
-    public String hello(@RequestParam String name) {
-        return "Hello, " + name + "!";
+    public String hello(@RequestParam String name, Model model) {
+        String theGreeting = "Hello, " + name + "! " + "You old so and so...";
+        model.addAttribute("greeting", theGreeting);
+        return "hello";
     }
 
     //Responds to /hello/LaunchCode
     @GetMapping("hello/{name}")
-    @ResponseBody
-    public String helloAgain(@PathVariable String name) {
-        return "Hello, " + name + "!";
+    public String helloAgain(@PathVariable String name, Model model) {
+        String standardGreeting = "Hello, " + name + "!";
+        model.addAttribute("greeting", standardGreeting);
+        return "hello";
     }
 
     @GetMapping("form")
     public String helloForm(){
         return "form";
+    }
+
+    @GetMapping("hello-names")
+    public String helloNames(Model model) {
+        List<String> nameList = new ArrayList<>();
+        nameList.add("Steve");
+        nameList.add("Nat");
+        nameList.add("Tobi");
+        model.addAttribute("names", nameList);
+        return "hello-list";
     }
 }
 
